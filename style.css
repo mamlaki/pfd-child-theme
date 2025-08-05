@@ -1,0 +1,21 @@
+/*
+  Theme Name:   PFD Child Theme
+  Theme URI:    https://preparedforduty.ca
+  Description:  A child theme of Twenty Twenty-Five for customization, part of the Prepared for Duty July–August 2025 redesign.
+  Author:       Melek Redwan
+  Author URI:   ...
+  Template:     twentytwentyfive
+  Version:      1.0.0
+  License:      GNU General Public License v2 or later
+  License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+  Text Domain:  pfd-child-theme
+
+  This theme is licensed under the GPL.
+*/
+
+/* ----- Header Search Icon -----*/
+.wp-block-search__input {
+    border: 2px solid var(--wp--preset--color--primary-lightest);
+    border-radius: 4px;
+    padding: 8px 12px;
+}

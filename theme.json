@@ -1,0 +1,393 @@
+{
+    "$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "color": {
+            "palette": [
+                {
+                    "slug": "primary-lightest",
+                    "color": "#F5B1AD",
+                    "name": "Primary Lightest"
+                },
+                {
+                    "slug": "primary-light",
+                    "color": "#ED7770",
+                    "name": "Primary Light"
+                },
+                {
+                    "slug": "primary",
+                    "color": "#D3362D",
+                    "name": "Primary"
+                },
+                {
+                    "slug": "primary-dark",
+                    "color": "#A02A23",
+                    "name": "Primary Dark"
+                },
+                {
+                    "slug": "primary-darkest",
+                    "color": "#5C1814",
+                    "name": "Primary Darkest"
+                },
+                {
+                    "slug": "secondary-lightest",
+                    "color": "#B0B6CB",
+                    "name": "Secondary Lightest"
+                },
+                {
+                    "slug": "secondary-light",
+                    "color": "#757FA4",
+                    "name": "Secondary Light"
+                },
+                {
+                    "slug": "secondary",
+                    "color": "#3A487D",
+                    "name": "Secondary"
+                },
+                {
+                    "slug": "secondary-dark",
+                    "color": "#293257",
+                    "name": "Secondary Dark"
+                },
+                {
+                    "slug": "secondary-darkest",
+                    "color": "#171D32",
+                    "name": "Secondary Darkest"
+                },
+                {
+                    "slug": "tertiary-lightest",
+                    "color": "#BDC4CF",
+                    "name": "Tertiary Lightest"
+                },
+                {
+                    "slug": "tertiary-light",
+                    "color": "#8C97AC",
+                    "name": "Tertiary Light"
+                },
+                {
+                    "slug": "tertiary",
+                    "color": "#5B6B88",
+                    "name": "Tertiary"
+                },
+                {
+                    "slug": "tertiary-dark",
+                    "color": "#404B5F",
+                    "name": "Tertiary Dark"
+                },
+                {
+                    "slug": "tertiary-darkest",
+                    "color": "#242B36",
+                    "name": "Tertiary Darkest"
+                },
+                {
+                    "slug": "neutral-background",
+                    "color": "#F7FAFC",
+                    "name": "Neutral Background"
+                },
+                {
+                    "slug": "neutral-foreground",
+                    "color": "#2D3748",
+                    "name": "Neutral Foreground"
+                },
+                {
+                    "slug": "neutral-border-divider",
+                    "color": "#E2E8F0",
+                    "name": "Neutral Border-Divider"
+                },
+                {
+                    "slug": "alert-success-lightest",
+                    "color": "#C6F6D5",
+                    "name": "Alert Success Lightest"
+                },
+                {
+                    "slug": "alert-success-light",
+                    "color": "#68D391",
+                    "name": "Alert Success Light"
+                },
+                {
+                    "slug": "alert-success",
+                    "color": "#2F855A",
+                    "name": "Alert Success"
+                },
+                {
+                    "slug": "alert-success-dark",
+                    "color": "#276749",
+                    "name": "Alert Success Dark"
+                },
+                {
+                    "slug": "alert-success-darkest",
+                    "color": "#1C4532",
+                    "name": "Alert Success Darkest"
+                },
+                {
+                    "slug": "alert-warning-lightest",
+                    "color": "#FCEBA8",
+                    "name": "Alert Warning Lightest"
+                },
+                {
+                    "slug": "alert-warning-light",
+                    "color": "#FCD34D",
+                    "name": "Alert Warning Light"
+                },
+                {
+                    "slug": "alert-warning",
+                    "color": "#D69E2E",
+                    "name": "Alert Warning"
+                },
+                {
+                    "slug": "alert-warning-dark",
+                    "color": "#B58924",
+                    "name": "Alert Warning Dark"
+                },
+                {
+                    "slug": "alert-warning-darkest",
+                    "color": "#865A1F",
+                    "name": "Alert Warning Darkest"
+                },
+                {
+                    "slug": "alert-error-lightest",
+                    "color": "#FED7D7",
+                    "name": "Alert Error Lightest"
+                },
+                {
+                    "slug": "alert-error-light",
+                    "color": "#FC8181",
+                    "name": "Alert Error Light"
+                },
+                {
+                    "slug": "alert-error",
+                    "color": "#D93333",
+                    "name": "Alert Error"
+                },
+                {
+                    "slug": "alert-error-dark",
+                    "color": "#C53030",
+                    "name": "Alert Error Dark"
+                },
+                {
+                    "slug": "alert-error-darkest",
+                    "color": "#9B2C2C",
+                    "name": "Alert Error Darkest"
+                },
+                {
+                    "slug": "pfd-red",
+                    "color": "#EE2F41",
+                    "name": "PFD Red"
+                },
+                {
+                    "slug": "pfd-blue",
+                    "color": "#032A4C",
+                    "name": "PFD Blue"
+                },
+                {
+                    "slug": "pfd-grey",
+                    "color": "#D1D2D4",
+                    "name": "PFD Grey"
+                }
+            ]
+        },
+        "typography": {
+            "fontWeight": true,
+            "fontFamilies": [
+                {
+                    "slug": "libre-franklin",
+                    "fontFamily": "Libre Franklin, sans-serif",
+                    "name": "Libre Franklin"
+                }
+            ],
+            "customFontSize": true,
+            "customLineHeight": true,
+            "fontSizes": [
+                {
+                    "slug": "h1",
+                    "size": "3rem",
+                    "name": "H1"
+                },
+                {
+                    "slug": "h2",
+                    "size": "2.25rem",
+                    "name": "H2"
+                },
+                {
+                    "slug": "h3",
+                    "size": "1.75rem",
+                    "name": "H3"
+                },
+                {
+                    "slug": "h4",
+                    "size": "1.5rem",
+                    "name": "H4"
+                },
+                {
+                    "slug": "h5",
+                    "size": "1.25rem",
+                    "name": "H5"
+                },
+                {
+                    "slug": "body",
+                    "size": "1rem",
+                    "name": "Body"
+                },
+                {
+                    "slug": "caption",
+                    "size": "0.875rem",
+                    "name": "Caption"
+                }
+            ],
+            "lineHeights": [
+                {
+                    "slug": "header-line-height",
+                    "value": "1.4",
+                    "name": "Header Line Height"
+                },
+                {
+                    "slug": "default",
+                    "value": 1.5,
+                    "name": "Default"
+                }
+            ]
+        },
+        "spacing": {
+            "blockGap": true,
+            "customSpacingSize": true,
+            "units": [ "px", "em", "rem", "%" ],
+            "spacing": [
+                {
+                    "slug": "l",
+                    "size": "4rem",
+                    "name": "L"
+                },
+                {
+                    "slug": "m",
+                    "size": "2rem",
+                    "name": "M"
+                },
+                {
+                    "slug": "s",
+                    "size": "1rem",
+                    "name": "S"
+                },
+                {
+                    "slug": "xs",
+                    "size": "0.5rem",
+                    "name": "XS"
+                }
+            ]
+        },
+        "layout": {
+            "contentSize": "800px",
+            "wideSize": "1200px",
+            "allowCustomContentAndWideSize": true
+        },
+        "border": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        },
+        "background": {
+            "backgroundImage": true,
+            "backgroundSize": true
+        },
+        "custom": {
+            "borderRadius": {
+                "default": "4px"
+            },
+            "color": {
+                "primaryLightest": "#F5B1AD",
+                "primaryLight": "#ED7770",
+                "primary": "#D3362D",
+                "primaryDark": "#A02A23",
+                "primaryDarkest": "#5C1814",
+                "secondaryLightest": "#B0B6CB",
+                "secondaryLight": "#757FA4",
+                "secondary": "#3A487D",
+                "secondaryDark": "#293257",
+                "secondaryDarkest": "#171D32",
+                "tertiaryLightest": "#BDC4CF",
+                "tertiaryLight": "#8C97AC",
+                "tertiary": "#5B6B88",
+                "tertiaryDark": "#404B5F",
+                "tertiaryDarkest": "#242B36",
+                "neutralBackground": "#F7FAFC",
+                "neutralForeground": "#2D3748",
+                "neutralBorderDivider": "#E2E8F0",
+                "alertSuccessLightest": "#C6F6D5",
+                "alertSuccessLight": "#68D391",
+                "alertSuccess": "#2F855A",
+                "alertSuccessDark": "#276749",
+                "alertSuccessDarkest": "#1C4532",
+                "alertWarningLightest": "#FCEBA8",
+                "alertWarningLight": "#FCD34D",
+                "alertWarning": "#D69E2E",
+                "alertWarningDark": "#B58924",
+                "alertWarningDarkest": "#865A1F",
+                "alertErrorLightest": "#FED7D7",
+                "alertErrorLight": "#FC8181",
+                "alertError": "#D93333",
+                "alertErrorDark": "#C53030",
+                "alertErrorDarkest": "#9B2C2C",
+                "pfdRed": "#EE2F41",
+                "pfdBlue": "#032A4C",
+                "pfdGrey": "#D1D2D4"
+            }
+        }
+    },
+    "styles": {
+        "typography": {
+            "fontFamily": "var(--wp--preset--font-family--libre-franklin)"
+        },
+        "elements": {
+            "h1": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--h1)",
+                    "lineHeight": "var(--wp--preset--line-height--header-line-height)",
+                    "fontWeight": "700"
+                }
+            },
+            "h2": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--h2)",
+                    "lineHeight": "var(--wp--preset--line-height--header-line-height)",
+                    "fontWeight": "600"
+                }
+            },
+            "h3": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--h3)",
+                    "lineHeight": "var(--wp--preset--line-height--header-line-height)",
+                    "fontWeight": "600"
+                }
+            },
+            "h4": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--h4)",
+                    "lineHeight": "var(--wp--preset--line-height--header-line-height)",
+                    "fontWeight": "500"
+                }
+            },
+            "h5": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--h5)",
+                    "lineHeight": "var(--wp--preset--line-height--header-line-height)",
+                    "fontWeight": "500"
+                }
+            },
+            "p": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--body)",
+                    "lineHeight": "var(--wp--preset--line-height--default)",
+                    "fontWeight": "400"
+                }
+            },
+            "figcaption": {
+                "typography": {
+                    "fontSize": "var(--wp--preset--font-size--caption)",
+                    "lineHeight": "var(--wp--preset--line-height--default)",
+                    "fontWeight": "300"
+                }
+            }
+        }
+    }
+}
