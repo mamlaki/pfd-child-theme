@@ -13,9 +13,89 @@
   This theme is licensed under the GPL.
 */
 
-/* ----- Header Search Icon -----*/
-.wp-block-search__input {
-    border: 2px solid var(--wp--preset--color--primary-lightest);
-    border-radius: 4px;
-    padding: 8px 12px;
+/* ----- Sticky Header ----- */
+header:has(>.is-position-sticky) {
+  position: sticky;
+  top: calc(0px + var(--wp-admin--admin-bar--height, 0px));
+  z-index: 100;
+}
+
+header {
+  border-bottom: 0 solid rgba(0, 0, 0, 0.1);
+  transition: border-bottom 0.3s ease-in-out;
+}
+
+body.is-scrolled header {
+  border-bottom: 2px solid var(--wp--preset--color--neutral-border-divider);
+}
+
+/* ----- Global Focus Styles ----- */
+:where(a, button, [role="button"], input, select, textarea, summary,
+  .wp-element-button, .wp-block-navigation__responsive-container-open, .wp-block-navigation__responsive-container-close,
+  [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--wp--preset--color--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--wp--preset--color--primary) 25%, transparent);
+  text-decoration: none;
+}
+
+:where(a, button, [role="button"], input, select, textarea, summary,
+  .wp-element-button, .wp-block-navigation__responsive-container-open, .wp-block-navigation__responsive-container-close,
+  [tabindex]:not([tabindex="-1"])):focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+@supports not selector(:focus-visible) {
+  :where(a, button, [role="button"], input, select, textarea, summary,
+  .wp-element-button, .wp-block-navigation__responsive-container-open, .wp-block-navigation__responsive-container-close,
+  [tabindex]:not([tabindex="-1"])):focus {
+  outline: 2px solid var(--wp--preset--color--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--wp--preset--color--primary) 25%, transparent);
+  text-decoration: none;
+  }
+}
+
+/* ----- Buttons ----- */
+.primary-btn a {
+  background-color: var(--wp--preset--color--primary);
+  transition: background-color 0.1s ease-in-out;
+}
+
+.primary-btn a:hover {
+  background-color: var(--wp--preset--color--primary-dark) !important;
+}
+
+/* ----- Footer Border ----- */
+footer {
+  border-top: 2px solid var(--wp--preset--color--neutral-border-divider);
+}
+
+/* ----- Footer Items Row Group ----- */
+.footer-menus {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-menus > .wp-block-group {
+  flex: 1 1 220px;
+}
+
+@media (min-width: 1200px) {
+  .footer-menus {
+    flex-wrap: nowrap;  
+    justify-content: space-between;
+  }
+
+  .footer-menus > .wp-block-group {
+    flex: 0 1 auto;
+  }
+}
+
+/* Footer Links */
+footer a:hover {
+  text-decoration-color: var(--wp--preset--color--primary);
+  text-decoration-thickness: 2px !important;
 }
