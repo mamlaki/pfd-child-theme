@@ -65,6 +65,9 @@ add_action('init', function () {
     'style_handle' => 'pfd-nav-style',
   ]);
 
+  // Register block patterns
+  register_block_pattern_category('pfd', ['label' => __('PFD Patterns', 'pfd-child-theme')]);
+
   // Hide Site Banner While Editing
   add_action('wp_head', function () {
     if (is_user_logged_in()) {

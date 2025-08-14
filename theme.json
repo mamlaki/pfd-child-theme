@@ -76,7 +76,7 @@
         "blockGap": true,
         "customSpacingSize": true,
         "units": ["px","em","rem","%"],
-        "spacing": [
+        "spacingSizes": [
           { "slug": "l", "size": "4rem", "name": "L" },
           { "slug": "m", "size": "2rem", "name": "M" },
           { "slug": "s", "size": "1rem", "name": "S" },

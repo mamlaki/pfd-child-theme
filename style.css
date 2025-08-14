@@ -67,6 +67,65 @@ body.is-scrolled header {
   background-color: var(--wp--preset--color--primary-dark) !important;
 }
 
+.secondary-btn a {
+  background-color: transparent;
+  color: var(--wp--preset--color--secondary) !important;;
+  transition: all 0.1s ease-in-out;
+}
+
+.secondary-btn a:hover {
+  background-color: var(--wp--preset--color--secondary) !important;
+  color: var(--wp--preset--color--neutral-background) !important;
+}
+
+/* Hero Styles */
+.hero--responsive-center {
+  text-align: center;
+  margin-left: 0;
+}
+
+.hero--responsive-center .wp-block-buttons {
+  justify-content: center;
+}
+
+.hero--responsive-center.wp-block-cover {
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+  .hero--responsive-center.wp-block-cover .wp-block-cover__inner-container {
+    padding: 0 14rem;
+  }
+}
+
+.hero--desktop-narrow-left {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+@media (min-width: 1200px) {
+  .hero--responsive-center {
+    text-align: left;
+  }
+
+  .hero--responsive-center .wp-block-buttons {
+    justify-content: flex-start;
+  }
+
+  .hero--responsive-center.wp-block-cover {
+    justify-content: flex-start;
+  }
+
+  .hero--desktop-narrow-left {
+    max-width: 60ch !important;
+  }
+
+  .wp-block-cover .hero--desktop-narrow-left {
+    margin-left: 0 !important;
+  }
+}
+
 /* ----- Footer Border ----- */
 footer {
   border-top: 2px solid var(--wp--preset--color--neutral-border-divider);
