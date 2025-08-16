@@ -49,6 +49,9 @@
           { "slug": "pfd-red", "color": "#EE2F41", "name": "PFD Red" },
           { "slug": "pfd-blue", "color": "#032A4C", "name": "PFD Blue" },
           { "slug": "pfd-grey", "color": "#D1D2D4", "name": "PFD Grey" }
+        ],
+        "gradients": [
+          { "slug": "card-mist-neutral", "name": "Card Mist Neutral", "gradient": "linear-gradient(180deg, #FFFFFF 0%, var(--wp--preset--color--neutral-background) 100%)" }
         ]
       },
       "typography": {

@@ -126,6 +126,147 @@ body.is-scrolled header {
   }
 }
 
+/* Button with Icon Styles */
+.wp-block-button.btn-with-icon > .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+}
+
+/* Card Styles */
+.is-style-pfd-card {
+  --card-accent-primary: var(--wp--preset--color--primary-light);
+  --card-accent-secondary: var(--wp--preset--color--secondary-light);
+  --card-lift: -3px;
+  --card-shadow-rest: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--card-shadow-rest);
+  transition:
+    border-color 0.20s ease,
+    box-shadow 0.20s ease,
+    transform 0.20s ease;
+  will-change: transform, box-shadow, border-color;
+  border: 1px solid var(--wp--preset--color--neutral-border-divider);
+  border-radius: 4px;
+  padding: var(--wp--preset--spacing--m);
+  min-height: 250px;
+  background-image: linear-gradient(180deg,#fff 0%, var(--wp--preset--color--neutral-background) 100%);
+}
+
+.is-style-pfd-card:is(:hover, :focus-within, :focus-visible) {
+  border-color: var(--card-accent-primary) !important;
+  transform: translateY(var(--card-lift));
+  box-shadow: var(--card-shadow-hover);
+}
+
+.is-style-pfd-card.secondary-card:is(:hover, :focus-within, :focus-visible) {
+  border-color: var(--card-accent-secondary) !important;
+}
+
+/* 3 Card Layout */
+.wp-block-columns.pfd-3up {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.wp-block-columns.pfd3-up > .wp-block-column {
+  display: grid;
+}
+
+.wp-block-columns.pfd-3up > .wp-block-column > .wp-block-group.is-style-pfd-card {
+  align-self: stretch;
+}
+
+@media (min-width: 768px) {
+  .wp-block-columns.pfd-3up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wp-block-columns.pfd-3up > .wp-block-column:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wp-block-columns.pfd-3up {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .wp-block-columns.pfd-3up > .wp-block-column:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-style-pfd-card {
+    transition: none;
+  }
+} 
+
+/* Flip Cards */
+.pfd-flip { 
+  perspective: 1200px; position: relative; 
+}
+
+.pfd-flip__inner {
+  position: relative; 
+  width: 100%; 
+  height: 100%;
+  transform-style: preserve-3d; 
+  transition: transform .5s ease;
+  border-radius: inherit;
+}
+
+.pfd-flip__face {
+  position: absolute; 
+  inset: 0; 
+  border-radius: inherit;
+  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
+  display: grid; 
+  align-content: start; 
+  background: transparent;
+}
+
+.pfd-flip__front { 
+  transform: rotateY(0deg); 
+}
+
+.pfd-flip__back { 
+  transform: rotateY(180deg); 
+}
+
+.pfd-flip.is-flipped .pfd-flip__inner { 
+  transform: rotateY(180deg); 
+}
+
+.pfd-flip:not(.is-flipped) .pfd-flip__back { 
+  pointer-events: none; 
+}
+
+.pfd-flip.is-flipped .pfd-flip__front { 
+  pointer-events: none; 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfd-flip__inner { 
+    transition: none; 
+  }
+
+  .pfd-flip__front, .pfd-flip__back { 
+    transform: none; 
+  }
+
+  .pfd-flip.is-flipped .pfd-flip__front { 
+    display: none; 
+  }
+
+  .pfd-flip.is-flipped .pfd-flip__back { 
+    display: block; 
+  }
+}
+
 /* ----- Footer Border ----- */
 footer {
   border-top: 2px solid var(--wp--preset--color--neutral-border-divider);
