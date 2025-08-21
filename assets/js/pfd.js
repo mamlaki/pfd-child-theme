@@ -11,6 +11,29 @@
   document.addEventListener('DOMContentLoaded', update);
 })();
 
+// Compute admin bar offset for safe sticky positioning
+(function () {
+  if (typeof window === 'undefined') return;
+
+  function getAdminBarOffset() {
+    let bar = document.getElementById('wpadminbar');
+    if (!bar) return 0;
+    let cs = getComputedStyle(bar);
+    let isFixed = cs.position === 'fixed';
+    return isFixed ? (bar.offsetHeight || bar.getBoundingClientRect().height || 0) : 0;
+  }
+
+  function updateAdminBarOffsetlet() {
+    let root = document.documentElement;
+    let h = getAdminBarOffset();
+    root.style.setProperty('--pfd-admin-bar-offset', (h || 0) + 'px');
+  }
+
+  window.addEventListener('DOMContentLoaded', updateAdminBarOffsetlet);
+  window.addEventListener('load', updateAdminBarOffsetlet);
+  window.addEventListener('resize', updateAdminBarOffsetlet);
+})();
+
 // Flippable Cards
 (function() {
   if (typeof window === 'undefined') return;

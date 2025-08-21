@@ -105,7 +105,7 @@ header .wp-block-navigation.is-style-pfd-nav .is-menu-open .wp-block-navigation_
 /* Nav Panel */
 header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-dialog {
   position: absolute;
-  top: var(--wp-admin--admin-bar--height, 0px);
+  top: var(--pfd-admin-bar-offset, var(--wp-admin--admin-bar--height, 0px));
   left: 0;
   right: 0;
   height: 100vh;

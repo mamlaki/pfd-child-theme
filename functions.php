@@ -28,7 +28,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_get_theme()->get('Version')
   );
 
-  // JS
+  // Main JS
   wp_enqueue_script(
     'pfd-child',
     get_stylesheet_directory_uri() . '/assets/js/pfd.js',
@@ -37,6 +37,16 @@ add_action('wp_enqueue_scripts', function () {
     true
   );
 
+  // Table of Contents JS
+  wp_enqueue_script(
+    'pfd-toc',
+    get_stylesheet_directory_uri() . '/assets/js/pfd-toc.js',
+    [],
+    wp_get_theme()->get('Version'),
+    true
+  );
+
+  // Nav JS
   wp_enqueue_script(
     'pfd-nav',
     get_stylesheet_directory_uri() . '/assets/js/pfd-nav.js',
