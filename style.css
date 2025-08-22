@@ -282,6 +282,11 @@ body.is-scrolled header.wp-block-template-part {
   border-radius: 4px;
 }
 
+/* Pages Template Featured Image Border Radius */
+.wp-block-post-featured-image img {
+  border-radius: 4px;
+}
+
 /* ----- Footer Border ----- */
 footer {
   border-top: 2px solid var(--wp--preset--color--neutral-border-divider);
