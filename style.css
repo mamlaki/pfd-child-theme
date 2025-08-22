@@ -173,6 +173,10 @@ body.is-scrolled header.wp-block-template-part {
   border-color: var(--card-accent-secondary) !important;
 }
 
+.is-style-pfd-card.narrow-card {
+  max-width: 40rem;
+}
+
 /* 3 Card Layout */
 .wp-block-columns.pfd-3up {
   display: grid;
@@ -314,8 +318,9 @@ footer {
   }
 }
 
-/* Footer Links */
-footer a:hover {
+/* Links */
+a:hover {
+  text-decoration: underline;
   text-decoration-color: var(--wp--preset--color--primary);
   text-decoration-thickness: 2px !important;
 }
