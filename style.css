@@ -319,7 +319,8 @@ footer {
 }
 
 /* Links */
-a:hover {
+a:not(.wp-block-button a):hover,
+.wp-block-details summary:hover {
   text-decoration: underline;
   text-decoration-color: var(--wp--preset--color--primary);
   text-decoration-thickness: 2px !important;
