@@ -129,3 +129,41 @@
     document.querySelectorAll('.pfd-flip').forEach(syncHeight);
   });
 })();
+
+// Details Block Accordion Behaviour
+(function () {
+  if (typeof window === 'undefined') return;
+
+  function handleDetailsToggle(event) {
+    const toggled = event.target;
+    if (!toggled || toggled.tagName !== 'DETAILS') return;
+    if (!toggled.classList.contains('wp-block-details')) return;
+
+    if (!toggled.open) return;
+
+    // Scope to nearest Group block
+    const group = toggled.closest('.wp-block-group');
+    if (!group) return;
+
+    // Close any other open details inside the same group
+    group.querySelectorAll('details.wp-block-details[open]').forEach((d) => {
+      if (d !== toggled && !d.contains(toggled) && !toggled.contains(d)) {
+        d.open = false;
+      }
+    });
+  }
+
+  document.addEventListener('toggle', handleDetailsToggle, true);
+
+  function enforceInitialDetailsState() {
+    document.querySelectorAll('.wp-block-group').forEach((group) => {
+      const openDetails = Array.from(group.querySelectorAll('details.wp-block-details[open]'));
+      if (openDetails.length > 1) {
+        openDetails.slice(1).forEach((d) => { d.open = false; });
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', enforceInitialDetailsState);
+  window.addEventListener('load', enforceInitialDetailsState);
+})();
