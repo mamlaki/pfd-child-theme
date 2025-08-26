@@ -54,6 +54,15 @@ add_action('wp_enqueue_scripts', function () {
     '1.0.0',
     true
   );
+
+  // Carousel JS
+  wp_enqueue_script(
+    'pfd-carousel',
+    get_stylesheet_directory_uri() . '/assets/js/pfd-carousel.js',
+    [],
+    wp_get_theme()->get('Version'),
+    true
+  );
 }, 100);
 
 add_action('init', function () {
