@@ -61,6 +61,8 @@
         ],
         "customFontSize": true,
         "customLineHeight": true,
+        "letterSpacing": true,
+        "textTransform": true,
         "fontSizes": [
           { "slug": "h1", "size": "3rem", "name": "H1" },
           { "slug": "h2", "size": "2.25rem", "name": "H2" },
@@ -114,12 +116,12 @@
             "lineHeight": "var:custom|line-height|header"
           }
         },
-        "h1": { "typography": { "fontSize": "var(--wp--preset--font-size--h1)", "lineHeight": "var(--wp--preset--line-height--header-line-height)", "fontWeight": "700" } },
-        "h2": { "typography": { "fontSize": "var(--wp--preset--font-size--h2)", "lineHeight": "var(--wp--preset--line-height--header-line-height)", "fontWeight": "600" } },
-        "h3": { "typography": { "fontSize": "var(--wp--preset--font-size--h3)", "lineHeight": "var(--wp--preset--line-height--header-line-height)", "fontWeight": "600" } },
-        "h4": { "typography": { "fontSize": "var(--wp--preset--font-size--h4)", "lineHeight": "var(--wp--preset--line-height--header-line-height)", "fontWeight": "500" } },
-        "h5": { "typography": { "fontSize": "var(--wp--preset--font-size--h5)", "lineHeight": "var(--wp--preset--line-height--header-line-height)", "fontWeight": "500" } },
-        "figcaption": { "typography": { "fontSize": "var(--wp--preset--font-size--caption)", "lineHeight": "var(--wp--preset--line-height--default)", "fontWeight": "300" } }
+        "h1": { "typography": { "fontSize": "var(--wp--preset--font-size--h1)", "lineHeight": "var:custom|line-height|header", "fontWeight": "700" } },
+        "h2": { "typography": { "fontSize": "var(--wp--preset--font-size--h2)", "lineHeight": "var:custom|line-height|header", "fontWeight": "600" } },
+        "h3": { "typography": { "fontSize": "var(--wp--preset--font-size--h3)", "lineHeight": "var:custom|line-height|header", "fontWeight": "600" } },
+        "h4": { "typography": { "fontSize": "var(--wp--preset--font-size--h4)", "lineHeight": "var:custom|line-height|header", "fontWeight": "500" } },
+        "h5": { "typography": { "fontSize": "var(--wp--preset--font-size--h5)", "lineHeight": "var:custom|line-height|header", "fontWeight": "500" } },
+        "figcaption": { "typography": { "fontSize": "var(--wp--preset--font-size--caption)", "lineHeight": "var:custom|line-height|default", "fontWeight": "300" } }
       },
       "blocks": {
         "core/navigation": {
