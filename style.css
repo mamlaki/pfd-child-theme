@@ -599,3 +599,8 @@ textarea { resize: vertical; }
     scroll-behavior: auto;
   }
 }
+
+/* Align Center Row Group Fix */
+.row-center .wp-block-image {
+  line-height: 0;
+}
