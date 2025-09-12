@@ -66,6 +66,17 @@ add_action('wp_enqueue_scripts', function () {
 }, 100);
 
 add_action('init', function () {
+  // Register pfd tagline metabox
+  register_post_meta('page', 'pfd_tagline', [
+    'type'                => 'string',
+    'single'              => true,
+    'show_in_rest'        => true,
+    'sanitize_callback'   => 'wp_kses_post',
+    'auth_callback'       => function() {
+      return current_user_can('edit_posts');
+    },
+  ]);
+
   // Enqueue nav block style
   wp_enqueue_block_style(
     'core/navigation',
@@ -96,5 +107,30 @@ add_action('init', function () {
           }
         </style>';
     }
-});
+  });
+
+  // ----- Metabox Page Tagline -----
+  add_action('add_meta_boxes', function () {
+    add_meta_box(
+      'pfd_tagline_mb',
+      __('Page Tagline', 'pfd-child-theme'),
+      function ($post) {
+        $value = get_post_meta($post->ID, 'pfd_tagline', true);
+        wp_nonce_field('pfd_tagline_nonce', 'pfd_tagline_nonce');
+        echo '<p><em>Short tagline that appears under the featured image.</em></p>';
+        echo '<textarea id="pfd_tagline" name="pfd_tagline" rows="3" style="width:100%;">' . esc_textarea($value) . '</textarea>';
+      },
+      'page',
+      'side',
+      'high'
+    );
+  });
+
+  add_action('save_post_page', function($post_id) {
+    if (!isset($_POST['pfd_tagline_nonce']) || !wp_verify_nonce($_POST['pfd_tagline_nonce'], 'pfd_tagline_nonce')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_page', $post_id)) return;
+    $val = isset($_POST['pfd_tagline']) ? wp_kses_post($_POST['pfd_tagline']) : '';
+    update_post_meta($post_id, 'pfd_tagline', $val);
+  });
 });

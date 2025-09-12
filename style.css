@@ -604,3 +604,68 @@ textarea { resize: vertical; }
 .row-center .wp-block-image {
   line-height: 0;
 }
+
+/* ----- Vertical Rhythm and Media Spacing ----- */
+.wp-block-group.is-layout-flow > * {
+  margin-block: 0;
+}
+
+.wp-block-group.is-layout-flow > * + * {
+  margin-block-start: 0;
+}
+
+/* Headings */
+.wp-block-post-content h2 {
+  margin-block-start: calc(2.5 * 1lh);
+}
+
+.wp-block-post-content h2 + * {
+  margin-block-start: 0.75lh;
+}
+
+.wp-block-post-content h3 {
+  margin-block-start: calc(1.75 * 1lh);
+}
+
+.wp-block-post-content h3 + * {
+  margin-block-start: 0.6lh;
+}
+
+/* Media breathing room */
+.wp-block-post-content .wp-block-image,
+.wp-block-post-content .wp-block-video,
+.wp-block-post-content figure { 
+  margin-block: 1.5lh; 
+}
+
+/* Captions */
+.wp-block-post-content figure > figcaption {
+  margin-top: 0.5lh;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+.wp-block-post-content figure.alignleft,
+.wp-block-post-content figure.alignright { 
+  margin-block: 0.75lh; 
+}
+
+@media (max-width: 768px) {
+  .wp-block-post-content h2 {
+    margin-block-start: calc(2.2 * 1lh);
+  }
+
+  .wp-block-post-content h3 {
+    margin-block-start: calc(1.5 * 1lh);
+  }
+}
+
+/* Body Text Margin Fix */
+.wp-block-post-content .has-body-font-size {
+  margin-left: 0 !important;
+}
+
+/* Hide empty taglines */
+.pfd-tagline:empty {
+  display: none;
+}
