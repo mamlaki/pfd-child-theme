@@ -7,33 +7,41 @@
  * Inserter: yes
  */
 ?>
-<!-- wp:cover {"dimRatio":40,"overlayColor":"secondary-darkest","minHeight":60,"minHeightUnit":"vh","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|l","bottom":"var:preset|spacing|l"}}},"lock":{"move":false,"remove":false}} -->
-<div class="wp-block-cover alignfull" style="min-height:60vh;padding-top:var(--wp--preset--spacing--l);padding-bottom:var(--wp--preset--spacing--l)">
-  <span aria-hidden="true" class="wp-block-cover__background has-secondary-darkest-background-color has-background-dim-40 has-background-dim"></span>
-  <div class="wp-block-cover__inner-container">
-    <!-- wp:group {"layout":{"type":"constrained","contentSize":"<?php echo esc_attr( wp_get_global_settings( array( 'layout', 'contentSize' ) ) ?: '800px' ); ?>"},"style":{"spacing":{"blockGap":"var:preset|spacing|s"}}} -->
-    <div class="wp-block-group">
-      <!-- wp:heading {"level":1,"textColor":"neutral-background"} -->
-      <h1 class="has-neutral-background-color has-text-color">Add a strong headline</h1>
-      <!-- /wp:heading -->
+<!-- wp:cover {"dimRatio":40,"overlayColor":"secondary-darkest","isUserOverlayColor":true,"minHeight":500,"minHeightUnit":"px","lock":{"move":false,"remove":false},"align":"full","className":"is-dark","style":{"spacing":{"padding":{"top":"var:preset|spacing|l","bottom":"var:preset|spacing|l"}}},"layout":{"type":"constrained"}} -->
+<div class="is-dark wp-block-cover alignfull" style="padding-top:var(--wp--preset--spacing--l);padding-bottom:var(--wp--preset--spacing--l);min-height:500px">
+	<span aria-hidden="true" class="wp-block-cover__background has-secondary-darkest-background-color has-background-dim-40 has-background-dim"></span>
+	<div class="wp-block-cover__inner-container">
 
-      <!-- wp:paragraph {"textColor":"neutral-background"} -->
-      <p class="has-neutral-background-color has-text-color">One or two lines of supporting copy that explains the value.</p>
-      <!-- /wp:paragraph -->
+		<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|s"}},"layout":{"type":"constrained","contentSize":"66ch","justifyContent":"left"}} -->
+		<div class="wp-block-group alignwide">
 
-      <!-- wp:buttons -->
-      <div class="wp-block-buttons">
-        <!-- wp:button {"backgroundColor":"primary","textColor":"neutral-background"} -->
-        <div class="wp-block-button"><a class="wp-block-button__link has-neutral-background-color has-primary-background-color has-text-color has-background wp-element-button">Primary action</a></div>
-        <!-- /wp:button -->
+			<!-- wp:heading {"level":1,"textColor":"neutral-background","fontSize":"h1"} -->
+			<h1 class="wp-block-heading has-neutral-background-color has-text-color has-h-1-font-size">Add a strong headline</h1>
+			<!-- /wp:heading -->
 
-        <!-- wp:button {"className":"is-style-outline","textColor":"neutral-background"} -->
-        <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-neutral-background-color has-text-color">Secondary</a></div>
-        <!-- /wp:button -->
-      </div>
-      <!-- /wp:buttons -->
-    </div>
-    <!-- /wp:group -->
-  </div>
+			<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|s","bottom":"var:preset|spacing|s"}},"typography":{"fontStyle":"normal","fontWeight":"500"}},"textColor":"neutral-background","fontSize":"h5"} -->
+			<p class="has-neutral-background-color has-text-color has-h-5-font-size" style="margin-top:var(--wp--preset--spacing--s);margin-bottom:var(--wp--preset--spacing--s);font-style:normal;font-weight:500">One or two lines of supporting copy that explains the value.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|s"}}} -->
+			<div class="wp-block-buttons">
+				<!-- wp:button {"fontSize":"body"} -->
+        <div class="wp-block-button">
+					<a class="wp-block-button__link has-body-font-size has-custom-font-size wp-element-button" href="#">Primary action</a>
+				</div>
+				<!-- /wp:button -->
+
+				<!-- wp:button {"className":"is-style-outline","fontSize":"body"} -->
+				<div class="is-style-outline wp-block-button">
+					<a class="wp-block-button__link has-body-font-size has-custom-font-size wp-element-button" href="#">Secondary</a>
+				</div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
+
+		</div>
+		<!-- /wp:group -->
+
+	</div>
 </div>
 <!-- /wp:cover -->
