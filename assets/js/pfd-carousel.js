@@ -1,30 +1,29 @@
 (function () {
   if (typeof window === 'undefined') return;
 
-  function parsePx(value) {
-    if (!value || value === 'normal') return 0;
-    let n = parseFloat(value);
-    return isNaN(n) ? 0 : n;
-  }
+  // ---------- utils ----------
+  const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+  function parsePx(v) { if (!v || v === 'normal') return 0; const n = parseFloat(v); return isNaN(n) ? 0 : n; }
 
   function getMetrics(track, slides) {
-    const style = getComputedStyle(track);
-    const gap = parsePx(style.columnGap || style.gap);
-    const firstSlide = slides[0];
-    const slideWidth = firstSlide ? firstSlide.getBoundingClientRect().width : track.clientWidth;
+    const cs = getComputedStyle(track);
+    const gap = parsePx(cs.columnGap || cs.gap);
+    const first = slides[0];
+    const slideW = first ? first.getBoundingClientRect().width : track.clientWidth;
 
-    let itemSpan = 0;
-    if (slides.length >= 2) {
-      itemSpan = slides[1].offsetLeft - slides[0].offsetLeft;
-    }
-    if (itemSpan <= 0) {
-      itemSpan = slideWidth + gap;
-    }
+    // distance between slide starts
+    let span = 0;
+    if (slides.length >= 2) span = slides[1].offsetLeft - slides[0].offsetLeft;
+    if (span <= 0) span = slideW + gap;
 
-    const visible = Math.max(1, Math.round(track.clientWidth / (itemSpan || 1)));
+    // how many are fully visible-ish per viewport width
+    const visible = Math.max(1, Math.round(track.clientWidth / (span || 1)));
+
     const totalSlides = slides.length;
-    const totalPages = Math.max(1, Math.ceil(totalSlides / visible));
-    return { gap, slideWidth, itemSpan, visible, totalSlides, totalPages };
+    const maxStart = Math.max(0, totalSlides - visible);
+    const totalPages = maxStart + 1; // one page per valid start index
+
+    return { gap, slideW, itemSpan: span, visible, totalSlides, maxStart, totalPages };
   }
 
   function buildDots(carousel, totalPages) {
@@ -50,21 +49,24 @@
       btn.dataset.index = String(i);
       dots.appendChild(btn);
     }
-
     return dots;
   }
 
-  function getStartIndexForPage(pageIdx, visible, totalSlides) {
-    const maxStart = Math.max(0, totalSlides - visible);
-    const start = Math.min(maxStart, Math.max(0, pageIdx * visible));
-    return start;
-  }
+  const getStartIndexForPage = (pageIdx, m) => clamp(pageIdx, 0, m.maxStart);
 
-  function scrollToPage(track, slides, pageIdx, metrics) {
-    const startIndex = getStartIndexForPage(pageIdx, metrics.visible, metrics.totalSlides);
+  function scrollToPage(track, slides, pageIdx, metrics, state) {
+    const startIndex = getStartIndexForPage(pageIdx, metrics);
     const target = slides[startIndex];
     if (!target) return;
-    track.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+
+    state.animating = true;
+    state.targetLeft = target.offsetLeft;
+
+    // safety: clear earlier timer, set a new one (in case scrollend never fires)
+    if (state.animTimer) clearTimeout(state.animTimer);
+    state.animTimer = setTimeout(() => { state.animating = false; state.targetLeft = null; }, 1200);
+
+    track.scrollTo({ left: state.targetLeft, behavior: 'smooth' });
   }
 
   function updateActiveDot(carousel, pageIdx) {
@@ -77,56 +79,46 @@
     });
   }
 
-  function getIndexNearestViewportCenter(track, slides) {
-    const centerX = track.scrollLeft + track.clientWidth / 2;
-    let bestIndex = 0;
-    let bestDist = Infinity;
-    for (let i = 0; i < slides.length; i++) {
-      const slideCenter = slides[i].offsetLeft + slides[i].offsetWidth / 2;
-      const dist = Math.abs(slideCenter - centerX);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestIndex = i;
-      }
-    }
-    return bestIndex;
+  function getStartIndexFromScroll(track, metrics) {
+    const span = metrics.itemSpan || 1;
+    const frac = track.scrollLeft / span;
+    const EPS = 0.05; // small tolerance for subpixel/momentum
+    const idx = Math.round(frac + (frac >= 0 ? EPS : -EPS));
+    return clamp(idx, 0, metrics.maxStart);
   }
 
-  function computeCurrentPage(track, slides, metrics) {
-    if (metrics.totalPages <= 1) return 0;
-    const centerIndex = getIndexNearestViewportCenter(track, slides);
-    const pageIdx = Math.min(
-      metrics.totalPages - 1,
-      Math.max(0, Math.floor(centerIndex / metrics.visible))
-    );
-    return pageIdx;
-  }
+  const computeCurrentPageFromScroll = (track, metrics) => getStartIndexFromScroll(track, metrics);
 
   function initCarousel(carousel) {
     if (carousel.dataset.pfdCarouselInitialized === 'true') return;
+
     const track = carousel.querySelector('.pfd-carousel__track');
     if (!track) return;
-
     const slides = Array.from(track.children);
-    if (slides.length === 0) return;
+    if (!slides.length) return;
 
     let metrics = getMetrics(track, slides);
     let dots = buildDots(carousel, metrics.totalPages);
 
-    // Hide dots if only one page
-    if (metrics.totalPages <= 1) {
-      dots.setAttribute('hidden', '');
-    } else {
-      dots.removeAttribute('hidden');
+    // hide dots when single page
+    if (metrics.totalPages <= 1) dots.setAttribute('hidden', ''); else dots.removeAttribute('hidden');
+
+    const state = {
+      animating: false,
+      targetLeft: null,
+      animTimer: null,
+      scrollEndTimer: null,
+      expectedPage: 0
+    };
+
+    function setPageImmediate(idx) {
+      state.expectedPage = idx;
+      updateActiveDot(carousel, idx);
     }
 
     function goToPage(idx) {
-      scrollToPage(track, slides, idx, metrics);
-      
-      requestAnimationFrame(() => {
-        const page = computeCurrentPage(track, slides, metrics);
-        updateActiveDot(carousel, page);
-      });
+      setPageImmediate(idx);               
+      scrollToPage(track, slides, idx, metrics, state);  
     }
 
     function attachDotHandlers(dotsEl) {
@@ -139,38 +131,84 @@
     }
     attachDotHandlers(dots);
 
+    function finalizeActive() {
+      if (state.animating && state.targetLeft != null) {
+        const dist = Math.abs(track.scrollLeft - state.targetLeft);
+        if (dist > (metrics.itemSpan * 0.25)) return;
+      }
+
+      metrics = getMetrics(track, slides);
+      const page = computeCurrentPageFromScroll(track, metrics);
+      state.expectedPage = page;
+      state.animating = false;
+      state.targetLeft = null;
+      if (state.animTimer) { clearTimeout(state.animTimer); state.animTimer = null; }
+      updateActiveDot(carousel, page);
+    }
+
     let ticking = false;
+    const SCROLL_END_DELAY = 280;
+
     function onScroll() {
       if (ticking) return;
       ticking = true;
+
       requestAnimationFrame(() => {
-        metrics = getMetrics(track, slides); 
-        const page = computeCurrentPage(track, slides, metrics);
-        updateActiveDot(carousel, page);
+        if (state.animating && state.targetLeft != null) {
+          const dist = Math.abs(track.scrollLeft - state.targetLeft);
+          if (dist <= (metrics.itemSpan * 0.25)) {
+            finalizeActive();
+          } else {
+            
+          }
+        } else {
+          const page = computeCurrentPageFromScroll(track, metrics);
+          state.expectedPage = page;
+          updateActiveDot(carousel, page);
+        }
+
+        if (state.scrollEndTimer) clearTimeout(state.scrollEndTimer);
+        state.scrollEndTimer = setTimeout(finalizeActive, SCROLL_END_DELAY);
+
         ticking = false;
       });
     }
     track.addEventListener('scroll', onScroll, { passive: true });
 
-    // Resize handler 
-    let lastVisible = metrics.visible;
+    if ('onscrollend' in window || 'onscrollend' in track) {
+      track.addEventListener('scrollend', finalizeActive);
+    }
+
+    // On resize: preserve page, rebuild dots if model changes, realign scroll
     function onResize() {
+      const prevPage = computeCurrentPageFromScroll(track, metrics);
       const next = getMetrics(track, slides);
-      const visibleChanged = next.visible !== lastVisible || next.totalPages !== metrics.totalPages;
+      const modelChanged = (next.totalPages !== metrics.totalPages) || (next.visible !== metrics.visible);
       metrics = next;
-      if (visibleChanged) {
+
+      if (modelChanged) {
         dots = buildDots(carousel, metrics.totalPages);
         if (metrics.totalPages <= 1) dots.setAttribute('hidden', ''); else dots.removeAttribute('hidden');
         attachDotHandlers(dots);
-        lastVisible = metrics.visible;
+
+        const startIdx = getStartIndexForPage(prevPage, metrics);
+        const target = slides[startIdx];
+        if (target) {
+          track.scrollTo({ left: target.offsetLeft, behavior: 'auto' });
+        }
       }
-      const page = computeCurrentPage(track, slides, metrics);
-      updateActiveDot(carousel, page);
+
+      requestAnimationFrame(() => {
+        const page = computeCurrentPageFromScroll(track, metrics);
+        state.expectedPage = page;
+        updateActiveDot(carousel, page);
+      });
     }
     window.addEventListener('resize', onResize);
 
-    // Initialize active dot
-    updateActiveDot(carousel, computeCurrentPage(track, slides, metrics));
+    // Init
+    state.expectedPage = computeCurrentPageFromScroll(track, metrics);
+    updateActiveDot(carousel, state.expectedPage);
 
     carousel.dataset.pfdCarouselInitialized = 'true';
   }
@@ -182,5 +220,3 @@
   window.addEventListener('DOMContentLoaded', initAll);
   window.addEventListener('load', initAll);
 })();
-
-

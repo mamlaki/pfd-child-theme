@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Card Carousel
+ * Title: Card - Carousel
  * Slug: pfd-child-theme/card-carousel
  * Categories: pfd
  * Inserter: yes
@@ -11,8 +11,8 @@
 <div class="pfd-carousel wp-block-group">
   <!-- wp:group {"className":"pfd-carousel__track","layout":{"type":"default"}} -->
   <div class="pfd-carousel__track wp-block-group">
-    <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"300px"}},"gradient":"card-mist-neutral","layout":{"type":"default"}} -->
-    <div class="pfd-carousel__slide is-style-pfd-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:300px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
+   <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card secondary-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"330px"}},"gradient":"card-mist-neutral","layout":{"type":"flex","orientation":"vertical","verticalAlignment":"center","justifyContent":"stretch","flexWrap":"nowrap"}} -->
+    <div class="pfd-carousel__slide is-style-pfd-card secondary-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:330px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
       <!-- wp:heading {"level":3,"fontSize":"h3"} -->
       <h3 class="wp-block-heading has-h-3-font-size">Card One</h3>
       <!-- /wp:heading -->
@@ -31,8 +31,8 @@
     </div>
     <!-- /wp:group -->
 
-    <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"300px"}},"gradient":"card-mist-neutral","layout":{"type":"default"}} -->
-    <div class="pfd-carousel__slide is-style-pfd-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:300px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
+   <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card secondary-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"330px"}},"gradient":"card-mist-neutral","layout":{"type":"flex","orientation":"vertical","verticalAlignment":"center","justifyContent":"stretch","flexWrap":"nowrap"}} -->
+    <div class="pfd-carousel__slide is-style-pfd-card secondary-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:330px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
       <!-- wp:heading {"level":3,"fontSize":"h3"} -->
       <h3 class="wp-block-heading has-h-3-font-size">Card Two</h3>
       <!-- /wp:heading -->
@@ -51,8 +51,8 @@
     </div>
     <!-- /wp:group -->
 
-    <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"300px"}},"gradient":"card-mist-neutral","layout":{"type":"default"}} -->
-    <div class="pfd-carousel__slide is-style-pfd-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:300px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
+   <!-- wp:group {"className":"pfd-carousel__slide is-style-pfd-card secondary-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"330px"}},"gradient":"card-mist-neutral","layout":{"type":"flex","orientation":"vertical","verticalAlignment":"center","justifyContent":"stretch","flexWrap":"nowrap"}} -->
+    <div class="pfd-carousel__slide is-style-pfd-card secondary-card wp-block-group has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:330px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
       <!-- wp:heading {"level":3,"fontSize":"h3"} -->
       <h3 class="wp-block-heading has-h-3-font-size">Card Three</h3>
       <!-- /wp:heading -->
