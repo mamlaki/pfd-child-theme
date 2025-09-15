@@ -64,31 +64,170 @@ body.is-scrolled header.wp-block-template-part {
   }
 }
 
-/* ----- Buttons ----- */
-.primary-btn a,
-.primary-btn.contact {
-  background-color: var(--wp--preset--color--primary);
+/* ----- BUTTONS (is-style-outline, is-style-fill) ----- */
+/* Row behavior: center buttons vertically (avoid baseline weirdness) */
+.wp-block-buttons { 
+  align-items: center; 
+}
+
+/* Inner link: consistent box model & rhythm for ALL buttons */
+.wp-block-button > .wp-block-button__link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5ch;
+  line-height: 1.2;
+  padding: 0.65em 1.1em;
+  vertical-align: middle;
+  text-decoration: none;
   border-radius: 4px;
-  transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.12s ease-in-out, color 0.12s ease-in-out, border-color 0.12s ease-in-out;
 }
 
-.primary-btn a:hover,
-.primary-btn.contact:hover {
-  background-color: var(--wp--preset--color--primary-dark) !important;
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link { 
+  border: 2px solid transparent; 
 }
 
-.secondary-btn a {
+.wp-block-button.is-style-outline  > .wp-block-button__link { 
+  border-width: 2px; 
+}
+
+/* ----- FILL BUTTONS ----- */
+
+/* Default fill if no background picked */
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link:not(.has-background),
+.wp-block-button.is-style-fill > .wp-block-button__link:not(.has-background) {
+  background-color: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--neutral-background);
+}
+
+/* Overlay that darkens any fill color */
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link,
+.wp-block-button.is-style-fill > .wp-block-button__link {
+  position: relative;
+  overflow: hidden;
+}
+
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link::after,
+.wp-block-button.is-style-fill > .wp-block-button__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease-in-out;
+}
+
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link:hover::after,
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link:focus-visible::after,
+.wp-block-button.is-style-fill > .wp-block-button__link:hover::after,
+.wp-block-button.is-style-fill > .wp-block-button__link:focus-visible::after { 
+  opacity: 0.10; 
+}
+
+.wp-block-button:not(.is-style-outline) > .wp-block-button__link:active::after,
+.wp-block-button.is-style-fill > .wp-block-button__link:active::after { 
+  opacity: 0.16; 
+}
+
+/* ----- OUTLINE BUTTONS ----- */
+
+.wp-block-button.is-style-outline > .wp-block-button__link {
+  /* JS fallback */
+  --pfd-outline-color: var(--pfd-outline-color, var(--wp--preset--color--secondary));
   background-color: transparent;
-  color: var(--wp--preset--color--secondary) !important;;
-  transition: all 0.1s ease-in-out;
+  color: var(--pfd-outline-color);
+  border-color: var(--pfd-outline-color);
+  box-shadow: none;
 }
 
-.secondary-btn a:hover {
-  background-color: var(--wp--preset--color--secondary) !important;
+.wp-block-button.is-style-outline > .wp-block-button__link:hover,
+.wp-block-button.is-style-outline > .wp-block-button__link:focus-visible {
+  background-color: var(--pfd-outline-color);
   color: var(--wp--preset--color--neutral-background) !important;
+  border-color: var(--pfd-outline-color);
 }
 
-/* Hero Styles */
+/* Active: subtle press */
+.wp-block-button.is-style-outline > .wp-block-button__link:active { 
+  filter: brightness(0.98); 
+}
+
+.editor-styles-wrapper .wp-block-buttons { 
+  align-items: center; 
+}
+
+.editor-styles-wrapper .wp-block-button > .wp-block-button__link {
+  box-sizing: border-box; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 0.5ch; 
+  line-height: 1.2; 
+  padding: 0.65em 1.1em; 
+  vertical-align: middle; 
+  text-decoration: none;
+  border-radius: 4px; 
+  transition: background-color .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
+}
+
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link { 
+  border: 2px solid transparent; 
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline  > .wp-block-button__link { 
+  border-width: 2px; 
+}
+
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link,
+.editor-styles-wrapper .wp-block-button.is-style-fill > .wp-block-button__link { 
+  position: relative; overflow: hidden; 
+
+}
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link::after,
+.editor-styles-wrapper .wp-block-button.is-style-fill > .wp-block-button__link::after {
+  content:""; 
+  position:absolute; 
+  inset:0; 
+  border-radius:inherit; 
+  background:#000; 
+  opacity:0; 
+  pointer-events:none; 
+  transition:opacity .12s ease-in-out;
+}
+
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link:hover::after,
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link:focus-visible::after,
+.editor-styles-wrapper .wp-block-button.is-style-fill > .wp-block-button__link:hover::after,
+.editor-styles-wrapper .wp-block-button.is-style-fill > .wp-block-button__link:focus-visible::after { 
+  opacity:.10; 
+}
+
+.editor-styles-wrapper .wp-block-button:not(.is-style-outline) > .wp-block-button__link:active::after,
+.editor-styles-wrapper .wp-block-button.is-style-fill > .wp-block-button__link:active::after { 
+  opacity:.16; 
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline > .wp-block-button__link {
+  --pfd-outline-color: var(--pfd-outline-color, var(--wp--preset--color--secondary));
+  background-color: transparent;
+  color: var(--pfd-outline-color);
+  border-color: var(--pfd-outline-color);
+  box-shadow: none;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline > .wp-block-button__link:hover,
+.editor-styles-wrapper .wp-block-button.is-style-outline > .wp-block-button__link:focus-visible {
+  background-color: var(--pfd-outline-color);
+  color: var(--wp--preset--color--neutral-background) !important;
+  border-color: var(--pfd-outline-color);
+}
+
+
+/* ----- Hero Styles ------ */
 .hero--responsive-center {
   text-align: center;
   margin-left: 0;

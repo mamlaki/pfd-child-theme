@@ -167,3 +167,39 @@
   window.addEventListener('DOMContentLoaded', enforceInitialDetailsState);
   window.addEventListener('load', enforceInitialDetailsState);
 })();
+
+
+// Outline Button Color Freeze
+(function () {
+  if (typeof window === 'undefined') return;
+
+  function setOutlineVars(root = document) {
+    const links = root.querySelectorAll('.wp-block-button.is-style-outline > .wp-block-button__link');
+    links.forEach((el) => {
+      const cs = getComputedStyle(el);
+      const c = cs.color || '';
+      if (c) el.style.setProperty('--pfd-outline-color', c);
+    });
+  }
+
+  // init
+  window.addEventListener('DOMContentLoaded', () => setOutlineVars());
+  window.addEventListener('load', () => setOutlineVars());
+
+  const obs = new MutationObserver((muts) => {
+    for (const m of muts) {
+      if (m.addedNodes && m.addedNodes.length) {
+        m.addedNodes.forEach((n) => {
+          if (!(n instanceof Element)) return;
+          if (n.matches?.('.wp-block-button.is-style-outline, .wp-block-buttons')) {
+            setOutlineVars(n);
+          } else {
+            const inner = n.querySelector?.('.wp-block-button.is-style-outline > .wp-block-button__link');
+            if (inner) setOutlineVars(n);
+          }
+        });
+      }
+    }
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+})();
