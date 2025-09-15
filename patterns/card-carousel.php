@@ -23,8 +23,8 @@
 
       <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"right"}} -->
       <div class="wp-block-buttons">
-        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption"} -->
-        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">LEARN MORE</a></div>
+        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption","icon":"arrow-right"} -->
+        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">GO</a></div>
         <!-- /wp:button -->
       </div>
       <!-- /wp:buttons -->
@@ -43,8 +43,8 @@
 
       <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"right"}} -->
       <div class="wp-block-buttons">
-        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption"} -->
-        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">LEARN MORE</a></div>
+        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption","icon":"arrow-right"} -->
+        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">GO</a></div>
         <!-- /wp:button -->
       </div>
       <!-- /wp:buttons -->
@@ -63,8 +63,8 @@
 
       <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"right"}} -->
       <div class="wp-block-buttons">
-        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption"} -->
-        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">LEARN MORE</a></div>
+        <!-- wp:button {"className":"secondary-btn is-style-outline","fontSize":"caption","icon":"arrow-right"} -->
+        <div class="secondary-btn is-style-outline wp-block-button"><a class="wp-block-button__link has-caption-font-size has-custom-font-size wp-element-button" href="#">GO</a></div>
         <!-- /wp:button -->
       </div>
       <!-- /wp:buttons -->
