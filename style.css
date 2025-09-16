@@ -282,38 +282,24 @@ body.is-scrolled header.wp-block-template-part {
   gap: 0.5ch;
 }
 
-/* Card Styles */
+/* Base card */
 .is-style-pfd-card {
-  --card-accent-primary: var(--wp--preset--color--primary-light);
-  --card-accent-secondary: var(--wp--preset--color--secondary-light);
   --card-lift: -3px;
-  --card-shadow-rest: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --card-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --card-shadow-rest: 0 1px 2px rgba(0,0,0,.04);
+  --card-shadow-hover: 0 8px 16px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.04);
   box-shadow: var(--card-shadow-rest);
-  transition:
-    border-color 0.20s ease,
-    box-shadow 0.20s ease,
-    transform 0.20s ease;
-  will-change: transform, box-shadow, border-color;
   border: 1px solid var(--wp--preset--color--neutral-border-divider);
   border-radius: 4px;
   padding: var(--wp--preset--spacing--m);
   min-height: 250px;
   background-image: linear-gradient(180deg,#fff 0%, var(--wp--preset--color--neutral-background) 100%);
+  transition: border-color 0.20s ease, box-shadow 0.20s ease, transform 0.20s ease;
 }
 
-.is-style-pfd-card:is(:hover, :focus-within, :focus-visible) {
-  border-color: var(--card-accent-primary) !important;
+.is-style-pfd-card:is(:hover, :focus-within, :focus-visible){
+  border-color: var(--pfd-card-hover, var(--wp--preset--color--primary-light)) !important;
   transform: translateY(var(--card-lift));
   box-shadow: var(--card-shadow-hover);
-}
-
-.is-style-pfd-card.secondary-card:is(:hover, :focus-within, :focus-visible) {
-  border-color: var(--card-accent-secondary) !important;
-}
-
-.is-style-pfd-card.narrow-card {
-  max-width: 40rem;
 }
 
 /* 3 Card Layout */

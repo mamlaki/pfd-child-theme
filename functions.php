@@ -134,3 +134,23 @@ add_action('init', function () {
     update_post_meta($post_id, 'pfd_tagline', $val);
   });
 });
+
+add_action('enqueue_block_editor_assets', function () {
+  $rel   = '/assets/js/pfd-card-hover-control.js';
+  $path  = get_stylesheet_directory() . $rel;
+  $uri   = get_stylesheet_directory_uri() . $rel;
+
+  if ( file_exists( $path ) ) {
+    wp_enqueue_script(
+      'pfd-card-hover-control',
+      $uri,
+      [ 'wp-blocks','wp-dom-ready','wp-edit-post','wp-element','wp-components','wp-hooks','wp-i18n','wp-compose','wp-data','wp-block-editor' ],
+      filemtime( $path ),
+      true
+    );
+  } else {
+    add_action('admin_notices', function () use ( $path ) {
+      echo '<div class="notice notice-error"><p>Missing: <code>' . esc_html( $path ) . '</code></p></div>';
+    });
+  }
+});
