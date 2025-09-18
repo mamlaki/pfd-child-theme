@@ -791,9 +791,12 @@ textarea { resize: vertical; }
   }
 }
 
-/* Body Text Margin Fix */
-.wp-block-post-content .has-body-font-size {
+/* Page With TOC content column alignment */
+.page-template-page-with-toc .pfd-toc__content .wp-block-post-content,
+.page-template-page-with-toc .pfd-toc__content .wp-block-post-content > :where(:not(.alignleft):not(.alignright):not(.alignfull):not(.alignwide)) {
   margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: 100%;
 }
 
 /* Hide empty taglines */
