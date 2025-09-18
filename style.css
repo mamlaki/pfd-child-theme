@@ -529,7 +529,7 @@ a:not(.wp-block-button a):hover,
 }
 
 .pfd-toc__fab .wp-block-button__link {
-  width: 56px;
+  width: 56px !important;
   height: 56px;
   padding: 0;
   border-radius: 999px !important;
@@ -537,12 +537,37 @@ a:not(.wp-block-button a):hover,
   align-items: center;
   justify-content: center;
   font-size: 0;
+  line-height: 1;
+  position: relative;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
-.pfd-toc__fab .wp-block-button__link::after {
-  content: "☰";
-  font-size: 20px;
-  line-height: 1;
+
+.pfd-toc__fab .pfd-toc__fab-icon {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: currentColor;
+  display: block;
+  position: relative;
+}
+
+.pfd-toc__fab .pfd-toc__fab-icon::before,
+.pfd-toc__fab .pfd-toc__fab-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 999px;
+  background-color: currentColor;
+}
+
+.pfd-toc__fab .pfd-toc__fab-icon::before {
+  top: -6px;
+}
+
+.pfd-toc__fab .pfd-toc__fab-icon::after {
+  top: 6px;
 }
 
 .editor-styles-wrapper .pfd-toc__fab-container { 
