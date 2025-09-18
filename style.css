@@ -293,7 +293,13 @@ body.is-scrolled header.wp-block-template-part {
   padding: var(--wp--preset--spacing--m);
   min-height: 250px;
   background-image: linear-gradient(180deg,#fff 0%, var(--wp--preset--color--neutral-background) 100%);
+  width: min(100%, var(--pfd-card-max, 9999px));
+  max-width: var(--pfd-card-max, initial);
   transition: border-color 0.20s ease, box-shadow 0.20s ease, transform 0.20s ease;
+}
+
+.wp-block-columns .wp-block-column > .is-style-pfd-card {
+  justify-self: start;
 }
 
 .is-style-pfd-card:is(:hover, :focus-within, :focus-visible){
