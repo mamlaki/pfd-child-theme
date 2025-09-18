@@ -1,6 +1,38 @@
 (function () {
   if (typeof window === 'undefined') return;
 
+  const LOCK_STYLE_PROPS = ['position', 'top', 'left', 'right', 'width', 'paddingRight', 'overflow'];
+  let scrollLockState = null;
+  let fabViewportListenerAttached = false;
+
+  function focusHeadingElement(el) {
+    if (!el) return;
+    const hadTabIndex = el.hasAttribute('tabindex');
+    if (!hadTabIndex) el.setAttribute('tabindex', '-1');
+    const focus = () => {
+      if (typeof el.focus === 'function') {
+        try {
+          el.focus({ preventScroll: true });
+        } catch (err) {
+          el.focus();
+        }
+      }
+      if (!hadTabIndex) {
+        const cleanup = () => el.removeAttribute('tabindex');
+        if (typeof window.requestAnimationFrame === 'function') {
+          window.requestAnimationFrame(() => window.setTimeout(cleanup, 0));
+        } else {
+          window.setTimeout(cleanup, 0);
+        }
+      }
+    };
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(focus);
+    } else {
+      focus();
+    }
+  }
+
   function slugify(text) {
     return (text || '')
       .toString()
@@ -107,6 +139,75 @@
     return { overlay, sheet, close, content };
   }
 
+  function lockBodyScroll() {
+    if (scrollLockState) return;
+    const body = document.body;
+    const docEl = document.documentElement;
+    if (!body || !docEl) return;
+
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const storedStyles = {};
+    LOCK_STYLE_PROPS.forEach((prop) => {
+      storedStyles[prop] = body.style[prop];
+    });
+
+    scrollLockState = {
+      scrollY,
+      styles: storedStyles,
+      restoreBehavior: 'auto',
+      docOverflow: docEl.style.overflow,
+      pendingId: null
+    };
+
+    docEl.classList.add('pfd-toc-modal-open');
+    body.classList.add('pfd-toc-modal-open');
+
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+
+    const scrollbarGap = window.innerWidth - docEl.clientWidth;
+    if (scrollbarGap > 0) {
+      body.style.paddingRight = `${scrollbarGap}px`;
+    }
+    body.style.overflow = 'hidden';
+    docEl.style.overflow = 'hidden';
+  }
+
+  function unlockBodyScroll() {
+    if (!scrollLockState) return;
+    const state = scrollLockState;
+    if (!state) return;
+    const { scrollY, styles, restoreBehavior, docOverflow, pendingId } = state;
+    const body = document.body;
+    const docEl = document.documentElement;
+    if (!body || !docEl) return;
+
+    docEl.classList.remove('pfd-toc-modal-open');
+    body.classList.remove('pfd-toc-modal-open');
+
+    LOCK_STYLE_PROPS.forEach((prop) => {
+      body.style[prop] = styles[prop] || '';
+    });
+    docEl.style.overflow = docOverflow || '';
+
+    const restore = () => {
+      window.scrollTo({ top: scrollY, left: 0, behavior: restoreBehavior || 'auto' });
+      if (pendingId) {
+        const target = document.getElementById(pendingId);
+        if (target) focusHeadingElement(target);
+      }
+    };
+    scrollLockState = null;
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(restore);
+    } else {
+      restore();
+    }
+  }
+
   function getAdminBarHeight() {
     const el = document.getElementById('wpadminbar');
     if (el && getComputedStyle(el).position !== 'fixed') {
@@ -140,8 +241,19 @@
         const adminBar = getAdminBarHeight();
         const offset = adminBar + stickyOffset;
         const rect = target.getBoundingClientRect();
-        const y = window.scrollY + rect.top - offset;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        const currentScroll = scrollLockState
+          ? scrollLockState.scrollY
+          : (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0);
+        const y = currentScroll + rect.top - offset;
+        const top = Math.max(0, y);
+        if (scrollLockState) {
+          scrollLockState.scrollY = top;
+          scrollLockState.restoreBehavior = 'smooth';
+          scrollLockState.pendingId = id;
+        } else {
+          window.scrollTo({ top, behavior: 'smooth' });
+          focusHeadingElement(target);
+        }
         history.pushState(null, '', `#${id}`);
       }
     });
@@ -170,6 +282,30 @@
     });
 
     headings.forEach(h => observer.observe(h));
+  }
+
+  // Keep the floating action button anchored to the visual viewport
+  function updateFabViewportOffset() {
+    if (!('visualViewport' in window) || !window.visualViewport) return;
+    const viewport = window.visualViewport;
+    const delta = window.innerHeight - viewport.height;
+    const bottomInset = Math.max(0, delta - viewport.offsetTop);
+    const offset = Math.max(0, Math.round(bottomInset));
+    document.documentElement.style.setProperty('--pfd-toc-fab-dynamic-offset', `${offset}px`);
+  }
+
+  function initFabViewportCompensation() {
+    if (!('visualViewport' in window) || !window.visualViewport) return;
+    updateFabViewportOffset();
+    if (fabViewportListenerAttached) return;
+    fabViewportListenerAttached = true;
+    const viewport = window.visualViewport;
+    const schedule = () => window.requestAnimationFrame(updateFabViewportOffset);
+    viewport.addEventListener('resize', schedule);
+    viewport.addEventListener('scroll', schedule);
+    window.addEventListener('orientationchange', () => {
+      window.setTimeout(updateFabViewportOffset, 250);
+    });
   }
 
   function initInstance(tocEl) {
@@ -226,18 +362,25 @@
 
       function openModal() {
         modal.overlay.removeAttribute('hidden');
-        document.body.classList.add('pfd-toc-modal-open');
+        lockBodyScroll();
         fabButton.setAttribute('aria-expanded', 'true');
         // focus first link
         const first = modal.content.querySelector('a');
         if (first) first.focus({ preventScroll: true });
       }
 
-      function closeModal() {
+      function closeModal(opts = {}) {
+        const { restoreFocus = true } = opts;
         modal.overlay.setAttribute('hidden', '');
-        document.body.classList.remove('pfd-toc-modal-open');
+        unlockBodyScroll();
         fabButton.setAttribute('aria-expanded', 'false');
-        fabButton.focus({ preventScroll: true });
+        if (restoreFocus) {
+          try {
+            fabButton.focus({ preventScroll: true });
+          } catch (err) {
+            fabButton.focus();
+          }
+        }
       }
 
       fabButton.addEventListener('click', (e) => {
@@ -249,12 +392,17 @@
       modal.overlay.addEventListener('click', (e) => {
         if (e.target === modal.overlay) closeModal();
       });
+      modal.overlay.addEventListener('touchmove', (e) => {
+        if (!modal.content.contains(e.target)) {
+          e.preventDefault();
+        }
+      }, { passive: false });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !modal.overlay.hasAttribute('hidden')) closeModal();
       });
       modal.content.addEventListener('click', (e) => {
         const link = e.target.closest('a[href^="#"]');
-        if (link) closeModal();
+        if (link) closeModal({ restoreFocus: false });
       });
     }
 
@@ -263,6 +411,7 @@
 
   function initAll() {
     computeAndSetStickyOffsetVar();
+    initFabViewportCompensation();
     document.querySelectorAll('.pfd-toc').forEach(initInstance);
   }
 
@@ -270,5 +419,3 @@
   window.addEventListener('load', initAll);
   window.addEventListener('resize', computeAndSetStickyOffsetVar);
 })();
-
-
