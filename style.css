@@ -13,6 +13,20 @@
   This theme is licensed under the GPL.
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+[id] {
+  scroll-margin-top: var(--pfd-sticky-offset, 0px);
+}
+
 /* ----- Sticky Header ----- */
 header.wp-block-template-part {
   position: sticky;
