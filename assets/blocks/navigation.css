@@ -228,9 +228,9 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
 }
 
 /* Submenu items radius & padding */
-.wp-block-navigation.is-style-pfd-nav .wp-block-navigation__submenu-container .wp-block-navigation-item > a { 
-  border-radius: var(--_submenu-item-radius); padding: 
-  var(--_submenu-item-padding) 0 0 0; 
+.wp-block-navigation.is-style-pfd-nav .wp-block-navigation__submenu-container .wp-block-navigation-item > a {
+  border-radius: var(--_submenu-item-radius);
+  padding: var(--_submenu-py) var(--_submenu-px);
 }
 
 /* Keep label left, chevron right; split trigger/label */
@@ -328,8 +328,8 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
   padding-left: 0 !important;  
 }
 
-.wp-block-navigation.is-style-pfd-nav .wp-block-navigation__submenu-container { 
-  padding-top: 0 !important; 
+.wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container {
+  padding-top: 0 !important;
 }
 
 .wp-block-navigation.is-style-pfd-nav a:focus,
