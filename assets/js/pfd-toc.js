@@ -43,6 +43,49 @@
       .replace(/-+/g, '-');
   }
 
+  // Skip form/form plugin headings
+  const EXCLUDE_CONTAINERS = [
+    'form',
+    '.wp-block-jetpack-contact-form',
+    '.jetpack-contact-form',
+    '.grunion-contact-form',
+    '.wpforms-container',
+    '.gform_wrapper',
+    '.wpcf7',
+    '.nf-form-layout',
+    '.happyforms-form',
+    '.mc4wp-form',
+    '.caldera-grid',
+    '.pfd-toc-ignore'
+  ];
+
+  // Heading selectors to skip
+  const EXCLUDE_HEADINGS = [
+    '.screen-reader-text',
+    '.sr-only',
+    '[hidden]',
+    '[aria-hidden="true"]'
+  ];
+
+  function isHiddenDeep(el) {
+    for (let n = el; n && n !== document.body; n = n.parentElement) {
+      if (n.hasAttribute('hidden') || n.getAttribute('aria-hidden') === 'true') return true;
+      const cs = getComputedStyle(n);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return true;
+    }
+    return false;
+  }
+
+  function shouldIncludeHeading(h) {
+    if (EXCLUDE_HEADINGS.some(sel => h.matches(sel))) return false;
+    if (h.closest('[role="status"], [aria-live]')) return false;
+    if (EXCLUDE_CONTAINERS.some(sel => h.closest(sel))) return false;
+    if (isHiddenDeep(h)) return false;
+    const t = (h.textContent || '').trim();
+    if (!t || t.length < 2) return false;
+    return true;
+  }
+
   function ensureHeadingIds(headings, idPrefix) {
     const used = new Set();
     headings.forEach((h, i) => {
@@ -318,7 +361,7 @@
     const listHost = tocEl.querySelector('.pfd-toc__list');
     if (!listHost) return;
 
-    const headings = Array.from(content.querySelectorAll('h2, h3, h4'));
+    const headings = Array.from(content.querySelectorAll('h2, h3, h4')).filter(shouldIncludeHeading);
     if (!headings.length) {
       tocEl.classList.add('is-empty');
       const fab = columns.querySelector('.pfd-toc__fab');
