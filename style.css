@@ -716,10 +716,10 @@ textarea { resize: vertical; }
 
 /* Empty column fix */
 @media (max-width: 1023px) {
-  .pfd-toc-pattern .wp-block-columns > .wp-block-column:first-child {
+  .pfd-toc-pattern > .wp-block-columns:first-of-type > .wp-block-column:first-child {
     display: none;
   }
-  .pfd-toc-pattern .wp-block-columns > .wp-block-column:nth-child(2) {
+  .pfd-toc-pattern > .wp-block-columns:first-of-type > .wp-block-column:nth-child(2) {
     flex-basis: 100% !important;
   }
 }
