@@ -60,8 +60,18 @@ header.wp-block-template-part .pfd-logo-mobile  {
 }
 
 html.has-modal-open header.wp-block-template-part .pfd-logo-mobile { 
-  z-index: 99999999; 
-  display: inline-flex; 
+  position: relative;
+  z-index: 99999999;
+  display: inline-flex;
+}
+
+html.has-modal-open header.wp-block-template-part {
+  position: fixed !important;
+  top: var(--pfd-admin-bar-offset, var(--wp-admin--admin-bar--height, 0px)) !important;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10000;
 }
 
 /* Dim other nav items when a submenu is open*/
@@ -82,9 +92,10 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
 header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-container {
   position: fixed;
   inset: 0;
-  z-index: 9999 ;
-  padding: 0;                 
-  background: transparent;    
+  z-index: 9999;
+  padding: 0;
+  background: var(--pfd-nav-bg);
+  overscroll-behavior: contain;
 }
 
 /* Nav menu closed state */
@@ -108,8 +119,8 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-di
   top: var(--pfd-admin-bar-offset, var(--wp-admin--admin-bar--height, 0px));
   left: 0;
   right: 0;
-  height: 100vh;
-  width: 100vw;
+  bottom: 0;
+  width: 100%;
   max-width: none;
   background: var(--pfd-nav-bg);
   color: var(--pfd-nav-text);
@@ -118,6 +129,9 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-di
   padding: 20px 22px;
   border-radius: 0;
   box-shadow: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  overscroll-behavior: none;
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s ease;
@@ -131,8 +145,9 @@ header .wp-block-navigation.is-style-pfd-nav .is-menu-open .wp-block-navigation_
 /* Close panel button positioning */
 header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-container-close { 
   position: absolute; 
-  right: 40px; 
-  top: 40px; 
+  top: 0;
+  right: 0;
+  margin: clamp(16px, 3vw, 24px);
 }
 
 /* Container content layout */
@@ -143,8 +158,14 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
   align-items: stretch;
   justify-content: flex-start;
   padding-top: 6rem;
-  overflow: auto;
   padding-right: 4px;
+  padding-bottom: calc(2rem + 24px);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Column list */
@@ -153,7 +174,8 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100vh;
+  flex: 1 1 auto;
+  min-height: 0;
   text-align: left;
   width: 100%;
 }
@@ -180,7 +202,6 @@ header .wp-block-navigation.is-style-pfd-nav .wp-block-navigation__responsive-co
   color: var(--wp--preset--color--neutral-background) !important;
   flex-direction: row !important;
   margin-top: auto;
-  margin-bottom: calc(2rem + 24px);
   width: 100%;
 }
 
