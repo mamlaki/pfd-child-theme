@@ -150,3 +150,9 @@ add_action('enqueue_block_editor_assets', function () {
     }
   }
 });
+
+// Guarantee favicon tags
+add_action('wp_head', function () {
+  echo '<link rel="icon" href="/favicon.ico" sizes="any">'."\n";
+  echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png">'."\n";
+}, 99);
