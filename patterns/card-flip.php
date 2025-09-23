@@ -7,8 +7,8 @@
  * Description: Flippable card.
  */
 ?>
-<!-- wp:group {"className":"pfd-flip is-style-pfd-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"4px"},"dimensions":{"minHeight":"330px"}},"gradient":"card-mist-neutral","layout":{"type":"default"}} -->
-<div class="wp-block-group pfd-flip is-style-pfd-card has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:4px;min-height:330px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
+<!-- wp:group {"className":"pfd-flip is-style-pfd-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|m","bottom":"var:preset|spacing|m","left":"var:preset|spacing|m","right":"var:preset|spacing|m"},"blockGap":"var:preset|spacing|m"},"border":{"width":"1px","color":"#E2E8F0","radius":"8px"},"dimensions":{"minHeight":"330px"}},"gradient":"card-mist-neutral","layout":{"type":"default"}} -->
+<div class="wp-block-group pfd-flip is-style-pfd-card has-border-color has-card-mist-neutral-gradient-background has-background" style="border-color:#E2E8F0;border-width:1px;border-radius:8px;min-height:330px;padding-top:var(--wp--preset--spacing--m);padding-right:var(--wp--preset--spacing--m);padding-bottom:var(--wp--preset--spacing--m);padding-left:var(--wp--preset--spacing--m)">
 
   <!-- wp:group {"metadata":{"name":"Card Wrapper"},"className":"pfd-flip__inner"} -->
   <div class="wp-block-group pfd-flip__inner">
