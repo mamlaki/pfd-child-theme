@@ -444,6 +444,52 @@ body.is-scrolled header.wp-block-template-part {
   }
 }
 
+/* Flip Cards – editor view */
+.editor-styles-wrapper .pfd-flip {
+  perspective: none;
+}
+
+.editor-styles-wrapper .pfd-flip__inner {
+  position: static;
+  transform: none !important;
+  display: grid;
+  gap: var(--wp--preset--spacing--l, 1.5rem);
+}
+
+.editor-styles-wrapper .pfd-flip__face {
+  position: static;
+  transform: none !important;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  pointer-events: auto !important;
+  opacity: 1;
+}
+
+.editor-styles-wrapper .pfd-flip__front::before,
+.editor-styles-wrapper .pfd-flip__back::before {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--neutral-600, #475569);
+  background: var(--wp--preset--color--neutral-100, #F1F5F9);
+  border: 1px solid var(--wp--preset--color--neutral-border-divider, #E2E8F0);
+  border-radius: 999px;
+  padding: 0.3em 0.75em;
+  margin-bottom: var(--wp--preset--spacing--s, 0.75rem);
+  pointer-events: none;
+}
+
+.editor-styles-wrapper .pfd-flip__front::before {
+  content: 'Front';
+}
+
+.editor-styles-wrapper .pfd-flip__back::before {
+  content: 'Back';
+}
+
 /* Contact Map Border Radius */
 .wp-block-jetpack-map__gm-container.mapboxgl-map {
   border-radius: 4px;

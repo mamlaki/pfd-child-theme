@@ -42,7 +42,6 @@
 
     <!-- wp:group {"metadata":{"name":"Card - BACK"},"className":"pfd-flip__face pfd-flip__back"} -->
     <div class="wp-block-group pfd-flip__face pfd-flip__back">
-      <!-- Inner vertical stack (matches front) -->
       <!-- wp:group {"className":"pfd-flip__content","style":{"spacing":{"blockGap":"var:preset|spacing|m"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch","flexWrap":"nowrap"}} -->
       <div class="wp-block-group pfd-flip__content">
         <!-- wp:heading {"level":4,"fontSize":"h4"} -->
