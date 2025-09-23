@@ -63,9 +63,6 @@
       },
       "typography": {
         "fontWeight": true,
-        "fontFamilies": [
-          { "slug": "libre-franklin", "fontFamily": "Libre Franklin, sans-serif", "name": "Libre Franklin" }
-        ],
         "customFontSize": true,
         "customLineHeight": true,
         "letterSpacing": true,
@@ -121,7 +118,7 @@
     },
     "styles": {
       "typography": {
-        "fontFamily": "var(--wp--preset--font-family--libre-franklin)",
+        "fontFamily": "\"Libre Franklin\", sans-serif",
         "lineHeight": "var:custom|line-height|default"
       },
       "elements": {

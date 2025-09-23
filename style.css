@@ -13,6 +13,24 @@
   This theme is licensed under the GPL.
 */
 
+/* Libre Franklin */
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('./assets/fonts/libre-franklin_5.2.7_latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('./assets/fonts/libre-franklin_5.2.8_latin-wght-italic.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+
 html {
   scroll-behavior: smooth;
 }
