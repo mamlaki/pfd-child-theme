@@ -984,3 +984,14 @@ textarea { resize: vertical; }
 @media (prefers-reduced-motion: reduce){
   .wp-block-cover.pfd-aurora-blobs::before { animation: none; }
 }
+
+/* ----- Columns Mobile Stack Order ----- */
+.wp-block-column.has-mobile-order {
+  --pfd-mobile-order: initial;
+}
+
+@media (max-width: 781px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column.has-mobile-order {
+    order: var(--pfd-mobile-order);
+  }
+}

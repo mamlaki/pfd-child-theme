@@ -18,6 +18,7 @@ function pfd_child_enqueue_editor_assets() {
     $scripts = [
         '/assets/js/pfd-card-hover-control.js',
         '/assets/js/pfd-card-controls.js',
+        '/assets/js/pfd-columns-mobile-order.js',
     ];
 
     foreach ($scripts as $relative_path) {
