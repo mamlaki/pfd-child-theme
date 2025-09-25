@@ -427,12 +427,39 @@ body.is-scrolled header.wp-block-template-part {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pfd-flip__inner { 
-    transition: none; 
+  .pfd-flip {
+    perspective: none;
   }
 
-  .pfd-flip__front, .pfd-flip__back { 
+  .pfd-flip__inner { 
+    position: static;
     transform: none; 
+    -webkit-transform: none;
+    transition: none; 
+    height: auto;
+  }
+
+  .pfd-flip.is-flipped .pfd-flip__inner {
+    transform: none;
+    -webkit-transform: none;
+  }
+
+  .pfd-flip__face { 
+    position: static; 
+    transform: none; 
+    -webkit-transform: none;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .pfd-flip__front,
+  .pfd-flip__back {
+    transform: none;
+    -webkit-transform: none;
+  }
+
+  .pfd-flip__back {
+    display: none;
   }
 
   .pfd-flip.is-flipped .pfd-flip__front { 
@@ -440,7 +467,7 @@ body.is-scrolled header.wp-block-template-part {
   }
 
   .pfd-flip.is-flipped .pfd-flip__back { 
-    display: block; 
+    display: grid; 
   }
 }
 
