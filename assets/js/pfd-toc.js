@@ -104,50 +104,54 @@
     });
   }
 
-  function buildNestedList(headings) {
-    // Build nested UL based on h levels
-    const rootUl = document.createElement('ul');
-    rootUl.className = 'pfd-toc__list-root';
-    let currentLevel = 2;
-    let currentUl = rootUl;
-    const ulStack = [rootUl];
+  function buildNestedList(headings, rootUl) {
+    // Build nested UL
+    const root = rootUl || document.createElement('ul');
+    if (!root.classList.contains('pfd-toc__list-root')) {
+      root.classList.add('pfd-toc__list-root');
+    }
+    root.innerHTML = '';
+
+    const listStack = [root];
 
     headings.forEach(h => {
-      const level = Math.min(Number(h.tagName.substring(1)), 4);
+      const numericLevel = Number(h.tagName.substring(1));
+      const level = Number.isFinite(numericLevel) ? Math.min(numericLevel, 4) : 2;
+      let depth = Math.max(0, level - 2);
+
+      while (listStack.length - 1 > depth) {
+        listStack.pop();
+      }
+
+      while (listStack.length - 1 < depth) {
+        const parentUl = listStack[listStack.length - 1];
+        const lastLi = parentUl.lastElementChild;
+        if (!lastLi) {
+          depth = listStack.length - 1;
+          break;
+        }
+
+        const newUl = document.createElement('ul');
+        newUl.className = 'pfd-toc__sublist';
+        lastLi.appendChild(newUl);
+        listStack.push(newUl);
+      }
+
+      while (listStack.length - 1 > depth) {
+        listStack.pop();
+      }
+
+      const currentUl = listStack[listStack.length - 1];
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.href = `#${h.id}`;
       a.textContent = h.textContent.trim();
       a.className = 'pfd-toc__link';
       li.appendChild(a);
-
-      if (level > currentLevel) {
-        for (let l = currentLevel + 1; l <= level; l++) {
-          const newUl = document.createElement('ul');
-          newUl.className = 'pfd-toc__sublist';
-          const lastLi = currentUl.lastElementChild;
-
-          if (lastLi) {
-            lastLi.appendChild(newUl);
-          } else {
-            currentUl.appendChild(newUl);
-          }
-
-          ulStack.push(newUl);
-          currentUl = newUl;
-        }
-      } else if (level < currentLevel) {
-        for (let l = currentLevel - 1; l >= Math.max(level, 2); l--) {
-          ulStack.pop();
-          currentUl = ulStack[ulStack.length - 1] || rootUl;
-        }
-      }
-
       currentUl.appendChild(li);
-      currentLevel = level;
     });
 
-    return rootUl;
+    return root;
   }
 
   function createModal(id) {
@@ -372,9 +376,7 @@
     const idPrefix = `toc${Math.random().toString(36).slice(2, 7)}`;
     ensureHeadingIds(headings, '');
 
-    const built = buildNestedList(headings);
-    listHost.innerHTML = '';
-    listHost.appendChild(built);
+    const built = buildNestedList(headings, listHost);
 
     // Smooth scroll 
     enableSmoothScroll(listHost);
